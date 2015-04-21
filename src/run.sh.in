@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source "@CONFIG@"
+
+GAMMUSMSD_BIN="$(which gammu-smsd)"
+RECVSMS_SH="@BIN_DIR@/recvsms.sh"
+FORWSMS_SH="@BIN_DIR@/forwsms.sh"
+
+if [ ! -x $GAMMUSMSD_BIN ]; then
+	echo "$0: cannot execute gammu-smsd executable in '$GAMMU_BIN'."
+	exit 1
+fi
+
+if [ ! -x $RECVSMS_SH ]; then
+	echo "$0: cannot execute recvsms.sh script in '$RECVSMS_SH'."
+	exit 1
+fi
+
+if [ ! -x $FORWSMS_SH ]; then
+	echo "$0: cannot execute forwsms.sh script in '$FORWSMS_SH'."
+	exit 1
+fi
+
+
+$FORWSMS_SH 1> /dev/null 2> /dev/null&
+
+$GAMMUSMSD_BIN --config $GAMMU_SMSD_CONFIG --daemon
+

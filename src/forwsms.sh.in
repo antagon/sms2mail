@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source "@CONFIG@"
+
+while [ true ]
+do
+	for file in $(ls -1 "/tmp/messages")
+	do
+		echo "$file"
+	done
+
+	sleep 1
+done
+
+exit 0
+

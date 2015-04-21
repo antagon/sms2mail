@@ -1,0 +1,3 @@
+SMS_QUEUE_DIR="@INSTALL_DIR@/queue"
+GAMMU_SMSD_CONFIG="@CONF_DIR@/gammu-smsd.conf"
+

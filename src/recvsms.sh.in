@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source "@CONFIG@"
+
+if [ -z $SMS_MESSAGES ]; then
+	echo "$0: control variables are missing, you are probably running this script outside the gammu-smsd!"
+	exit 1
+fi
+
+for i in $(seq $SMS_MESSAGES)
+do
+	sms_number="SMS_"$i"_NUMBER"
+	sms_text="SMS_"$i"_TEXT"
+	output="$(date +%s%N)_${!sms_number}.txt"
+
+	echo -e "${!sms_number}\n${!sms_text}" >> "$SMS_QUEUE_DIR/$output"
+done
+
+exit 0
+
